@@ -12,7 +12,8 @@ use mepihindeveloper\components\interfaces\HeadersInterface;
  *
  * Реализует управление заголовками запроса
  */
-class Headers implements HeadersInterface {
+class Headers implements HeadersInterface
+{
 	
 	/**
 	 * @var array Заголовки
@@ -56,7 +57,8 @@ class Headers implements HeadersInterface {
 	/**
 	 * @inheritDoc
 	 */
-	public function set(array $params): void {
+	public function set(array $params): void
+	{
 		$this->getAll();
 		
 		foreach ($params as $header => $value)
@@ -70,7 +72,8 @@ class Headers implements HeadersInterface {
 	/**
 	 * @inheritDoc
 	 */
-	public function add(array $params): void {
+	public function add(array $params): void
+	{
 		foreach ($params as $header => $value)
 		{
 			$headerExists = array_key_exists($header, $this->headers);
@@ -83,7 +86,8 @@ class Headers implements HeadersInterface {
 	/**
 	 * @inheritDoc
 	 */
-	public function remove(string $key): void {
+	public function remove(string $key): void
+	{
 		$this->getAll();
 		
 		unset($this->headers[$key]);
@@ -93,7 +97,8 @@ class Headers implements HeadersInterface {
 	/**
 	 * @inheritDoc
 	 */
-	public function removeAll(): void {
+	public function removeAll(): void
+	{
 		$this->headers = [];
 		
 		header_remove();
@@ -102,7 +107,8 @@ class Headers implements HeadersInterface {
 	/**
 	 * @inheritDoc
 	 */
-	public function has(string $key): bool {
+	public function has(string $key): bool
+	{
 		$this->getAll();
 		
 		return array_key_exists($key, $this->headers);
@@ -111,7 +117,8 @@ class Headers implements HeadersInterface {
 	/**
 	 * @inheritDoc
 	 */
-	public function get(string $key): string {
+	public function get(string $key): string
+	{
 		if (!$this->has($key))
 		{
 			throw new InvalidArgumentException("Заголоков {$key} отсутсвует.");
@@ -123,7 +130,8 @@ class Headers implements HeadersInterface {
 	/**
 	 * @inheritDoc
 	 */
-	public function getAll(): array {
+	public function getAll(): array
+	{
 		$this->headers = !empty($this->headers) ? $this->headers : $this->getAllHeaders();
 		
 		return $this->headers;
