@@ -1,5 +1,10 @@
 <?php
+
 declare(strict_types = 1);
+
+namespace mepihindeveloper\components\interfaces;
+
+use InvalidArgumentException;
 
 /**
  * Интерфейс HeadersInterface

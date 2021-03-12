@@ -2,6 +2,11 @@
 
 declare(strict_types = 1);
 
+namespace mepihindeveloper\components;
+
+use InvalidArgumentException;
+use mepihindeveloper\components\interfaces\HeadersInterface;
+
 /**
  * Класс Headers
  *
@@ -26,27 +31,26 @@ class Headers implements HeadersInterface {
 	 */
 	private function getAllHeaders(): array
 	{
-		if (!function_exists('getallheaders'))
+		if (function_exists('getallheaders')) {
+			return getallheaders() !== false ? getallheaders() : [];
+		}
+
+		if (!is_array($_SERVER))
 		{
-			if (!is_array($_SERVER))
-			{
-				return [];
-			}
-			
-			$headers = [];
-			
-			foreach ($_SERVER as $name => $value)
-			{
-				if (strpos($name, 'HTTP_') === 0)
-				{
-					$headers[str_replace(' ', '-', ucwords(strtolower(str_replace('_', ' ', substr($name, 5)))))] = $value;
-				}
-			}
-			
-			return $headers;
+			return [];
 		}
 		
-		return getallheaders() !== false ? getallheaders() : [];
+		$headers = [];
+		
+		foreach ($_SERVER as $name => $value)
+		{
+			if (strpos($name, 'HTTP_') === 0)
+			{
+				$headers[str_replace(' ', '-', ucwords(strtolower(str_replace('_', ' ', substr($name, 5)))))] = $value;
+			}
+		}
+		
+		return $headers;
 	}
 	
 	/**
@@ -91,6 +95,7 @@ class Headers implements HeadersInterface {
 	 */
 	public function removeAll(): void {
 		$this->headers = [];
+		
 		header_remove();
 	}
 	
@@ -100,7 +105,7 @@ class Headers implements HeadersInterface {
 	public function has(string $key): bool {
 		$this->getAll();
 		
-		return isset($this->headers[$key]);
+		return array_key_exists($key, $this->headers);
 	}
 	
 	/**
