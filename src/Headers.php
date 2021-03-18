@@ -121,7 +121,7 @@ class Headers implements HeadersInterface
 	{
 		if (!$this->has($key))
 		{
-			throw new InvalidArgumentException("Заголоков {$key} отсутсвует.");
+			throw new InvalidArgumentException("Заголовок {$key} отсутствует.");
 		}
 		
 		return $this->headers[$key];
