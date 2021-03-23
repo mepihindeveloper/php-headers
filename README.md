@@ -33,6 +33,7 @@ src/
 
 Если удобно писать на почту, то можете воспользоваться этим адресом: mepihindeveloper@gmail.com
 
-Мой канал на YouTube, который посвящен разработке веб и игровых проектов: [YouTube: Максим Епихин](https://www.youtube.com/channel/UCKusRcoHUy6T4sei-rVzCqQ)
+Мой канал на YouTube, который посвящен разработке веб и игровых
+проектов: [YouTube: Максим Епихин](https://www.youtube.com/channel/UCKusRcoHUy6T4sei-rVzCqQ)
 
 Поддержать меня можно переводом на Яндекс.Деньги: [Денежный перевод](https://yoomoney.ru/to/410012382226565)

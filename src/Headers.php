@@ -12,16 +12,14 @@ use mepihindeveloper\components\interfaces\HeadersInterface;
  *
  * Реализует управление заголовками запроса
  */
-class Headers implements HeadersInterface
-{
+class Headers implements HeadersInterface {
 	
 	/**
 	 * @var array Заголовки
 	 */
 	private array $headers;
 	
-	public function __construct()
-	{
+	public function __construct() {
 		$this->headers = $this->getAllHeaders();
 	}
 	
@@ -30,23 +28,19 @@ class Headers implements HeadersInterface
 	 *
 	 * @return array
 	 */
-	private function getAllHeaders(): array
-	{
+	private function getAllHeaders(): array {
 		if (function_exists('getallheaders')) {
 			return getallheaders() !== false ? getallheaders() : [];
 		}
-
-		if (!is_array($_SERVER))
-		{
+		
+		if (!is_array($_SERVER)) {
 			return [];
 		}
 		
 		$headers = [];
 		
-		foreach ($_SERVER as $name => $value)
-		{
-			if (strpos($name, 'HTTP_') === 0)
-			{
+		foreach ($_SERVER as $name => $value) {
+			if (strpos($name, 'HTTP_') === 0) {
 				$headers[str_replace(' ', '-', ucwords(strtolower(str_replace('_', ' ', substr($name, 5)))))] = $value;
 			}
 		}
@@ -57,12 +51,10 @@ class Headers implements HeadersInterface
 	/**
 	 * @inheritDoc
 	 */
-	public function set(array $params): void
-	{
+	public function set(array $params): void {
 		$this->getAll();
 		
-		foreach ($params as $header => $value)
-		{
+		foreach ($params as $header => $value) {
 			$this->headers[$header] = $value;
 		}
 		
@@ -72,10 +64,17 @@ class Headers implements HeadersInterface
 	/**
 	 * @inheritDoc
 	 */
-	public function add(array $params): void
-	{
-		foreach ($params as $header => $value)
-		{
+	public function getAll(): array {
+		$this->headers = !empty($this->headers) ? $this->headers : $this->getAllHeaders();
+		
+		return $this->headers;
+	}
+	
+	/**
+	 * @inheritDoc
+	 */
+	public function add(array $params): void {
+		foreach ($params as $header => $value) {
 			$headerExists = array_key_exists($header, $this->headers);
 			$this->headers[$header] = $value;
 			
@@ -86,8 +85,7 @@ class Headers implements HeadersInterface
 	/**
 	 * @inheritDoc
 	 */
-	public function remove(string $key): void
-	{
+	public function remove(string $key): void {
 		$this->getAll();
 		
 		unset($this->headers[$key]);
@@ -97,8 +95,7 @@ class Headers implements HeadersInterface
 	/**
 	 * @inheritDoc
 	 */
-	public function removeAll(): void
-	{
+	public function removeAll(): void {
 		$this->headers = [];
 		
 		header_remove();
@@ -107,20 +104,8 @@ class Headers implements HeadersInterface
 	/**
 	 * @inheritDoc
 	 */
-	public function has(string $key): bool
-	{
-		$this->getAll();
-		
-		return array_key_exists($key, $this->headers);
-	}
-	
-	/**
-	 * @inheritDoc
-	 */
-	public function get(string $key): string
-	{
-		if (!$this->has($key))
-		{
+	public function get(string $key): string {
+		if (!$this->has($key)) {
 			throw new InvalidArgumentException("Заголовок {$key} отсутствует.");
 		}
 		
@@ -130,10 +115,9 @@ class Headers implements HeadersInterface
 	/**
 	 * @inheritDoc
 	 */
-	public function getAll(): array
-	{
-		$this->headers = !empty($this->headers) ? $this->headers : $this->getAllHeaders();
+	public function has(string $key): bool {
+		$this->getAll();
 		
-		return $this->headers;
+		return array_key_exists($key, $this->headers);
 	}
 }
