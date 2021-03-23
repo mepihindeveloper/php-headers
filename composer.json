@@ -1,28 +1,28 @@
 {
-    "name": "mepihindeveloper/php-headers",
-    "description": "Component for working with headers",
-    "type": "library",
-    "license": "MIT",
-    "keywords": [
-        "component",
-        "class",
-        "php",
-        "headers"
-    ],
-    "authors": [
-        {
-            "name": "mepihindeveloper",
-            "email": "mepihindeveloper@gmail.com"
-        }
-    ],
-    "require": {
-        "php": ">=7.4"
-    },
-    "autoload": {
-        "psr-4": {
-            "mepihindeveloper\\components\\": "src/"
-        }
-    },
-    "minimum-stability": "dev",
-    "prefer-stable": true
+	"name": "mepihindeveloper/php-headers",
+	"description": "Component for working with headers",
+	"type": "library",
+	"license": "MIT",
+	"keywords": [
+		"component",
+		"class",
+		"php",
+		"headers"
+	],
+	"authors": [
+		{
+			"name": "mepihindeveloper",
+			"email": "mepihindeveloper@gmail.com"
+		}
+	],
+	"require": {
+		"php": ">=7.4"
+	},
+	"autoload": {
+		"psr-4": {
+			"mepihindeveloper\\components\\": "src/"
+		}
+	},
+	"minimum-stability": "dev",
+	"prefer-stable": true
 }
