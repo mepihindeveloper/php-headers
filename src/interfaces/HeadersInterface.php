@@ -14,15 +14,6 @@ use InvalidArgumentException;
 interface HeadersInterface {
 	
 	/**
-	 * Устанавливает заголовок(и)
-	 *
-	 * @param array $params Заголовок(и) [key => value]
-	 *
-	 * @return void
-	 */
-	public function set(array $params): void;
-	
-	/**
 	 * Добавляет заголовок. Если заголовок уже существует, то он будет перезаписан.
 	 *
 	 * @param array $params Заголовки [key => value]

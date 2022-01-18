@@ -1,5 +1,14 @@
 # php-headers
 
+![release](https://img.shields.io/github/v/release/mepihindeveloper/php-headers?label=version)
+[![Packagist Version](https://img.shields.io/packagist/v/mepihindeveloper/php-headers)](https://packagist.org/packages/mepihindeveloper/php-headers)
+[![PHP Version Require](http://poser.pugx.org/mepihindeveloper/php-headers/require/php)](https://packagist.org/packages/mepihindeveloper/php-headers)
+![license](https://img.shields.io/github/license/mepihindeveloper/php-headers)
+
+![build](https://github.com/mepihindeveloper/php-headers/actions/workflows/php.yml/badge.svg?branch=development)
+[![codecov](https://codecov.io/gh/mepihindeveloper/php-headers/branch/development/graph/badge.svg?token=36PP7VKHKG)](https://codecov.io/gh/mepihindeveloper/php-headers)
+
+
 Компонент для работы с заголовками в PHP
 
 # Структура
@@ -19,13 +28,13 @@ src/
 
 | Метод               | Аргументы                   | Возвращаемые данные | Исключения               | Описание                                                                    |
 |---------------------|-----------------------------|---------------------|--------------------------|-----------------------------------------------------------------------------|
-| set(array $params)  | Заголовок(и) [key => value] | void                |                          | Устанавливает заголовок(и)                                                  |
 | add(array $params)  | Заголовок(и) [key => value] | void                |                          | Добавляет заголовок. Если заголовок уже существует, то он будет перезаписан |
 | remove(string $key) | Заголовок                   | void                |                          | Удаляет заголовок                                                           |
 | removeAll           |                             | void                |                          | Удаляет все заголовки                                                       |
 | has(string $key)    | Заголовок                   | bool                |                          | Проверяет наличие заголовка. Проверка идет на наличие ключа и значения      |
 | get(string $key)    | Заголовок                   | string              | InvalidArgumentException | Получает значение заголовка                                                 |
 | getAll              |                             |                     |                          | Получает все заголовки                                                      |
+| getIsApache         |                             | bool                |                          | Возвращает, является ли сервер Apache                                       |
 
 # Контакты
 
