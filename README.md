@@ -5,8 +5,8 @@
 [![PHP Version Require](http://poser.pugx.org/mepihindeveloper/php-headers/require/php)](https://packagist.org/packages/mepihindeveloper/php-headers)
 ![license](https://img.shields.io/github/license/mepihindeveloper/php-headers)
 
-![build](https://github.com/mepihindeveloper/php-headers/actions/workflows/php.yml/badge.svg?branch=development)
-[![codecov](https://codecov.io/gh/mepihindeveloper/php-headers/branch/development/graph/badge.svg?token=36PP7VKHKG)](https://codecov.io/gh/mepihindeveloper/php-headers)
+![build](https://github.com/mepihindeveloper/php-headers/actions/workflows/php.yml/badge.svg?branch=stable)
+[![codecov](https://codecov.io/gh/mepihindeveloper/php-headers/branch/stable/graph/badge.svg?token=36PP7VKHKG)](https://codecov.io/gh/mepihindeveloper/php-headers)
 
 
 Компонент для работы с заголовками в PHP
