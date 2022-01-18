@@ -14,13 +14,29 @@ use mepihindeveloper\components\interfaces\HeadersInterface;
  */
 class Headers implements HeadersInterface {
 	
+	public const APACHE = 'Apache';
+	
 	/**
 	 * @var array Заголовки
 	 */
 	private array $headers;
+	/**
+	 * @var bool Является ли сервер Apache
+	 */
+	private bool $isApache;
 	
 	public function __construct() {
+		$this->isApache = array_key_exists('SERVER_SOFTWARE', $_SERVER) && $_SERVER['SERVER_SOFTWARE'] === self::APACHE;
 		$this->headers = $this->getAllHeaders();
+	}
+	
+	/**
+	 * Возвращает, является ли сервер Apache
+	 *
+	 * @return bool
+	 */
+	public function getIsApache():bool {
+		return $this->isApache;
 	}
 	
 	/**
@@ -28,8 +44,8 @@ class Headers implements HeadersInterface {
 	 *
 	 * @return array
 	 */
-	private function getAllHeaders(): array {
-		if (function_exists('getallheaders')) {
+	public function getAllHeaders(): array {
+		if ($this->isApache && function_exists('getallheaders')) {
 			return getallheaders() !== false ? getallheaders() : [];
 		}
 		
@@ -51,22 +67,7 @@ class Headers implements HeadersInterface {
 	/**
 	 * @inheritDoc
 	 */
-	public function set(array $params): void {
-		$this->getAll();
-		
-		foreach ($params as $header => $value) {
-			$this->headers[$header] = $value;
-		}
-		
-		$this->add($params);
-	}
-	
-	/**
-	 * @inheritDoc
-	 */
 	public function getAll(): array {
-		$this->headers = !empty($this->headers) ? $this->headers : $this->getAllHeaders();
-		
 		return $this->headers;
 	}
 	
@@ -78,7 +79,7 @@ class Headers implements HeadersInterface {
 			$headerExists = array_key_exists($header, $this->headers);
 			$this->headers[$header] = $value;
 			
-			header("{$header}: {$value}", $headerExists);
+			header("$header: $value", $headerExists);
 		}
 	}
 	
@@ -86,8 +87,6 @@ class Headers implements HeadersInterface {
 	 * @inheritDoc
 	 */
 	public function remove(string $key): void {
-		$this->getAll();
-		
 		unset($this->headers[$key]);
 		header_remove($key);
 	}
@@ -116,8 +115,6 @@ class Headers implements HeadersInterface {
 	 * @inheritDoc
 	 */
 	public function has(string $key): bool {
-		$this->getAll();
-		
 		return array_key_exists($key, $this->headers);
 	}
 }
